@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,7 +10,6 @@
 }
 
 body {
-  background-image: url('./assets/main_bg.webp');
   background-color: #1a1a1a;
   background-repeat: no-repeat;
   background-size: cover;
@@ -20,7 +19,6 @@ body {
   margin: 0;
   color: #eeeef0;
 }
-
 
 /* side bar */
 
@@ -40,3 +38,58 @@ body::-webkit-scrollbar-thumb {
 body::-webkit-scrollbar-thumb:hover {
   background: #8dd930;
 }
+
+/* items */
+/* Custom scrollbar for the .overflow-items class */
+.overflow-items::-webkit-scrollbar {
+  width: 5px;
+}
+
+.overflow-items::-webkit-scrollbar-track {
+  background: #1c467000;
+}
+
+.overflow-items::-webkit-scrollbar-thumb {
+  background: #b7f36d;
+  border-radius: 5px;
+}
+
+.overflow-items::-webkit-scrollbar-thumb:hover {
+  background: #8dd930;
+}
+
+/* For Firefox */
+.overflow-items {
+  scrollbar-width: thin;
+  scrollbar-color: #b7f36d #1c467000;
+}
+
+
+/* shadow */
+
+.all__side__shadow {
+  box-shadow: 0px 1px 6px 1.5px #000000b8;
+}
+
+.all__side__shadow_btn {
+  position: relative;
+  box-shadow: 0px 1px 6px 1.5px #d4d3d3b8;
+}
+
+/* hide number input arrow */
+@layer base {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+@layer base {
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(50%) sepia(100%) saturate(500%) hue-rotate(180deg)
+      brightness(90%) contrast(90%);
+    width: 20px;
+    height: 20px;
+  }
+}
+

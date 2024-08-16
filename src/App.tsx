@@ -1,12 +1,18 @@
-import Layouts from "./components/Layouts";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import Layouts from "./components/layouts/Layouts";
+import Home from "./pages/Home";
+import Transactions from "./pages/Transactions";
 
 function App() {
   return (
-    <>
+    <Router>
       <Layouts>
-        <h1>hellow world</h1>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/transactions" element={<Transactions />} />
+        </Routes>
       </Layouts>
-    </>
+    </Router>
   );
 }
 
