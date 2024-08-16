@@ -1,5 +1,5 @@
-import CreateForm from "../components/add-form/CreateForm";
 import IncomeExpenseChart from "../components/charts/IncomeExpenseChart";
+import CreateForm from "../components/formComponents/CreateForm";
 import DataProvider from "../containers/DataProvider";
 
 const Home = () => {

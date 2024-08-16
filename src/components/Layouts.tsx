@@ -1,10 +1,6 @@
-import Footer from "./Footer";
-import Header from "./Header";
-
-interface ILayoutProps {
-  children?: React.ReactNode;
-  title?: string;
-}
+import Footer from "../containers/Footer";
+import Header from "../containers/Header";
+import { ILayoutProps } from "../interface/Interfaces";
 
 const Layouts: React.FC<ILayoutProps> = ({ children }) => {
   return (

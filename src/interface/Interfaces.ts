@@ -8,19 +8,23 @@ export interface Transaction {
   date?: string;
   description?: string;
 }
-
-// src/components/add-form/Interfaces.ts
-
+export interface ILayoutProps {
+  children?: React.ReactNode;
+  title?: string;
+}
 export interface Summary {
   id?: string;
-  income?: number; // Change from string to number
-  expense?: number; // Change from string to number
-  balance?: number; // Change from string to number
+  income?: number;
+  expense?: number;
+  balance?: number;
 }
 
 export interface DataContextType {
   transactions: Transaction[];
   setTransactions: React.Dispatch<React.SetStateAction<Transaction[]>>;
+  summary: Summary;
+  setSummary: React.Dispatch<React.SetStateAction<Summary>>;
+  storageKey: string;
 }
 
 export interface OptionType {
@@ -38,4 +42,10 @@ export interface InputProps {
   onBlur: (event: React.FocusEvent<HTMLInputElement, Element>) => void;
   error?: string;
   options?: OptionType[];
+}
+
+export interface ITotalSummary {
+  totalIncome?: any;
+  totalExpense?: any;
+  balance?: any;
 }

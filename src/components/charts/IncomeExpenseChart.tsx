@@ -14,25 +14,21 @@ import { useDataContext } from "../../containers/DataProvider";
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Legend, Tooltip);
 
 const IncomeExpenseChart = () => {
-  // Sample data provided
   const { transactions } = useDataContext();
 
   const incomeData = [];
   const expenseData = [];
   const labels: number[] = [];
 
-  // Process the transactions
   transactions.forEach((transaction) => {
     if (transaction.date) {
       const day = new Date(transaction.date).getDate();
       const amount = Number(transaction.amount);
 
-      // If the day is not already in the labels array, add it
       if (!labels.includes(day)) {
         labels.push(day);
       }
 
-      // Populate income and expense data based on the transaction type
       if (transaction.type === "income") {
         incomeData[day - 1] = amount;
       } else if (transaction.type === "expense") {
@@ -40,8 +36,6 @@ const IncomeExpenseChart = () => {
       }
     }
   });
-
-  // Fill missing days with 0
   const maxDay = Math.max(...labels);
   for (let i = 1; i <= maxDay; i++) {
     if (!labels.includes(i)) {
@@ -51,7 +45,7 @@ const IncomeExpenseChart = () => {
     if (expenseData[i - 1] === undefined) expenseData[i - 1] = 0;
   }
 
-  labels.sort((a, b) => a - b); // Sort labels in ascending order
+  labels.sort((a, b) => a - b);
 
   const data = {
     labels,

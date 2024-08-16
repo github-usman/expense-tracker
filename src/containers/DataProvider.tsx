@@ -1,14 +1,6 @@
 import React, { ReactNode, createContext, useContext, useEffect, useState } from "react";
-import { Transaction, Summary } from "../components/add-form/Interfaces";
-import { getFromLocalStorage, saveToLocalStorage } from "../services/storage";
-
-interface DataContextType {
-  transactions: Transaction[];
-  setTransactions: React.Dispatch<React.SetStateAction<Transaction[]>>;
-  summary: Summary;
-  setSummary: React.Dispatch<React.SetStateAction<Summary>>;
-  storageKey: string;
-}
+import { getFromLocalStorage, saveToLocalStorage } from "../utils/storage";
+import { DataContextType, Summary, Transaction } from "../interface/Interfaces";
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
 

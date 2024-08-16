@@ -1,6 +1,6 @@
 import React from "react";
 import Select, { StylesConfig } from "react-select";
-import { InputProps, OptionType } from "../add-form/Interfaces";
+import { InputProps, OptionType } from "../../interface/Interfaces";
 
 const customStyles = (error?: string): StylesConfig<OptionType, false> => ({
   control: (provided) => ({

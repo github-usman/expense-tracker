@@ -3,8 +3,8 @@ import { FaEdit } from "react-icons/fa";
 import { FaArrowDownLong, FaArrowUpLong } from "react-icons/fa6";
 import { MdDeleteForever } from "react-icons/md";
 import { useDataContext } from "../../containers/DataProvider";
-import { Transaction } from "../add-form/Interfaces";
 import TransactionForm from "./TransactionForm";
+import { Transaction } from "../../interface/Interfaces";
 const TransactionsTable = () => {
   const { transactions, setTransactions } = useDataContext();
   const [editingTransaction, setEditingTransaction] = useState<Transaction | null>(null);

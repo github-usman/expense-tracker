@@ -7,15 +7,14 @@ import {
   Title,
   Tooltip,
 } from "chart.js";
-import React, { useMemo } from "react";
-import { Bar } from "react-chartjs-2";
-import Input from "../common/Input";
 import { useFormik } from "formik";
+import React from "react";
 import * as Yup from "yup";
 import { useDataContext } from "../../containers/DataProvider";
-import { Summary } from "./Interfaces";
-import profit from "../../assets/profit.png";
-import loss from "../../assets/loss.png";
+import TotalSummary from "../../containers/TotalSummary";
+import { Summary } from "../../interface/Interfaces";
+import SummaryChart from "../charts/SummaryChart";
+import Input from "./Input";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -69,22 +68,6 @@ const CreateForm: React.FC = () => {
     Number(summary?.expense) || 0
   );
   const balance = Number(totalIncome - totalExpense);
-
-  // Prepare chart data
-  const chartData = useMemo(
-    () => ({
-      labels: ["Income", "Expense", "Balance"],
-      datasets: [
-        {
-          label: "Financial Summary",
-          data: [totalIncome, totalExpense, balance],
-          backgroundColor: ["#4CAF50", "#F44336", balance < 0 ? "#f21a1a" : "#2196F3"],
-        },
-      ],
-    }),
-    [totalIncome, totalExpense, balance]
-  );
-
   return (
     <>
       <h2 className="text-xl font-bold ">Financial Overview</h2>
@@ -123,35 +106,18 @@ const CreateForm: React.FC = () => {
             </div>
           </form>
         </div>
-        <div className="bg-conetentBg rounded-lg max-h-[258px] flex-1 w-full lg:w-1/2 p-[16px] all__side__shadow">
-          <Bar
-            data={chartData}
-            options={{
-              indexAxis: "y",
-              responsive: true,
-              maintainAspectRatio: false,
-            }}
-            className="w-full"
-          />
-        </div>
+        <SummaryChart
+          totalIncome={totalIncome}
+          totalExpense={totalExpense}
+          balance={balance}
+        />
       </div>
-      <div className="bg-conetentBg p-[16px] gap-[16px] flex flex-col items-center justify-center rounded-lg all__side__shadow">
-        <h2 className="text-xl font-bold text-center">Summary</h2>
-        <div className="flex  gap-[16px] flex-col md:flex-row self-start md:self-center">
-          <p className="text-[#fff]">Total Income: ${totalIncome}</p>
-          <p className="text-[#f8fb56]">Total Expenses: ${totalExpense}</p>
-          <p
-            className={`flex items-center  gap-2 text-${balance > 0 ? "success" : "danger"}`}
-          >
-            <img
-              src={balance > 0 ? profit : loss}
-              className="h-[18px] w-[18px]"
-              alt="grow"
-            />
-            Final Balance: ${balance.toFixed(2)}
-          </p>
-        </div>
-      </div>
+
+      <TotalSummary
+        totalIncome={totalIncome}
+        totalExpense={totalExpense}
+        balance={balance}
+      />
     </>
   );
 };

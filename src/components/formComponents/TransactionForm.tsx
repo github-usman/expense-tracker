@@ -3,8 +3,9 @@ import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import * as Yup from "yup";
 import { useDataContext } from "../../containers/DataProvider";
-import Input from "../common/Input";
 import { RxCross2 } from "react-icons/rx";
+import Input from "./Input";
+import { optionsCategory, optionsType } from "../../assets/contants";
 
 const TransactionForm: React.FC<{
   editingTransaction?: any;
@@ -12,6 +13,9 @@ const TransactionForm: React.FC<{
 }> = ({ editingTransaction, setEditingTransaction }) => {
   const { transactions, setTransactions } = useDataContext();
   const [isEditing, setIsEditing] = useState(false);
+  const now = new Date();
+  const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+  const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
 
   const formik = useFormik({
     initialValues: {
@@ -30,7 +34,10 @@ const TransactionForm: React.FC<{
         .required("Amount is required")
         .positive("Amount must be positive"),
       category: Yup.string().required("Category is required"),
-      date: Yup.date().required("Date is required"),
+      date: Yup.date()
+        .required("Date is required")
+        .min(startOfMonth, `Date must be after ${startOfMonth.toLocaleDateString()}`)
+        .max(endOfMonth, `Date must be before ${endOfMonth.toLocaleDateString()}`),
       description: Yup.string().required("Description is required"),
     }),
     onSubmit: (values) => {
@@ -56,7 +63,7 @@ const TransactionForm: React.FC<{
     },
   });
 
-  // Populate form when editing a transaction
+  // update after edit side effect
   useEffect(() => {
     if (editingTransaction) {
       formik.setValues(editingTransaction);
@@ -93,10 +100,7 @@ const TransactionForm: React.FC<{
             placeholder="Select transaction type"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            options={[
-              { value: "expense", label: "Expense" },
-              { value: "income", label: "Income" },
-            ]}
+            options={optionsType}
             error={formik.touched.type ? formik.errors.type : undefined}
           />
           <Input
@@ -116,15 +120,7 @@ const TransactionForm: React.FC<{
             placeholder="Select category"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            options={[
-              { value: "🍲Food and Dining", label: "Food and Dining" },
-              { value: "🛻Transportation", label: "Transportation" },
-              { value: "🛍️Groceries", label: "Groceries" },
-              { value: "🛠Utilities", label: "Utilities" },
-              { value: "🎆Entertainment", label: "Entertainment" },
-              { value: "💆Personal Care", label: "Personal Care" },
-              { value: "💡Other", label: "Other" },
-            ]}
+            options={optionsCategory}
             error={formik.touched.category ? formik.errors.category : undefined}
           />
           <Input

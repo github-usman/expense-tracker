@@ -1,6 +1,5 @@
-import React from "react";
-import TransactionForm from "../components/transactions/TransactionForm";
-import TransactionsTable from "../components/transactions/TransactionsTable";
+import TransactionForm from "../components/formComponents/TransactionForm";
+import TransactionsTable from "../components/formComponents/TransactionsTable";
 import DataProvider from "../containers/DataProvider";
 
 const Transactions = () => {
