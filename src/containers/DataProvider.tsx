@@ -4,10 +4,11 @@ import { DataContextType, Summary, Transaction } from "../interface/Interfaces";
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
 
-const DataProvider: React.FC<{ children: ReactNode; storageKey: string }> = ({
-  children,
-  storageKey,
-}) => {
+const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    return getFromLocalStorage<boolean>("isDarkMode") ?? true;
+  });
+
   const [transactions, setTransactions] = useState<Transaction[]>(() => {
     return getFromLocalStorage<Transaction[]>("total-transaction") || [];
   });
@@ -19,11 +20,18 @@ const DataProvider: React.FC<{ children: ReactNode; storageKey: string }> = ({
   useEffect(() => {
     saveToLocalStorage("total-transaction", transactions);
     saveToLocalStorage("total-summary", summary);
-  }, [transactions, summary, storageKey]);
+  }, [transactions, summary]);
 
   return (
     <DataContext.Provider
-      value={{ transactions, setTransactions, summary, setSummary, storageKey }}
+      value={{
+        transactions,
+        setTransactions,
+        summary,
+        setSummary,
+        isDarkMode,
+        setIsDarkMode,
+      }}
     >
       {children}
     </DataContext.Provider>

@@ -54,14 +54,14 @@ const IncomeExpenseChart = () => {
         label: "Income",
         data: incomeData,
         fill: false,
-        borderColor: "rgba(75, 192, 192, 1)",
+        borderColor: "#1A73E8",
         tension: 0.3,
         pointBorderColor: "rgba(0, 0, 0, 0)",
         pointBackgroundColor: "rgba(0, 0, 0, 0)",
-        pointHoverBackgroundColor: "rgba(75, 192, 192, 1)",
-        pointHoverBorderColor: "rgb(255, 99, 132)",
-        pointRadius: 1,
-        pointHoverRadius: 10,
+        pointHoverBackgroundColor: "#1A73E8",
+        pointHoverBorderColor: "#85a9d8",
+        pointRadius: 10,
+        pointHoverRadius: 7,
         hitRadius: 300,
       },
       {
@@ -70,8 +70,8 @@ const IncomeExpenseChart = () => {
         fill: false,
         borderColor: "rgba(255, 99, 132, 1)",
         tension: 0.3,
-        pointRadius: 3,
-        pointHoverRadius: 10,
+        pointRadius: 10,
+        pointHoverRadius: 7,
         pointBorderColor: "rgba(0, 0, 0, 0)",
         pointBackgroundColor: "rgba(0, 0, 0, 0)",
         pointHoverBackgroundColor: "rgba(255, 99, 132, 1)",
@@ -124,7 +124,7 @@ const IncomeExpenseChart = () => {
       <Line
         data={data}
         options={options}
-        className="bg-conetentBg w-full rounded-lg all__side__shadow"
+        className=" bg-LconetentBg dark:bg-conetentBg w-full rounded-lg all__side__shadow dark:shadow-dark_all__side__shadow"
       />
     </div>
   );

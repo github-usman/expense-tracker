@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import { useDataContext } from "../../containers/DataProvider";
 import { RxCross2 } from "react-icons/rx";
 import Input from "./Input";
-import { optionsCategory, optionsType } from "../../assets/contants";
+import {  expenseList, incomeList, optionsType } from "../../assets/contants";
 
 const TransactionForm: React.FC<{
   editingTransaction?: any;
@@ -78,16 +78,25 @@ const TransactionForm: React.FC<{
     }
   };
 
+  const categoryOptions =
+  formik.values.type === 'income'
+    ? incomeList
+    : formik.values.type === 'expense'
+    ? expenseList
+    : [];
   return (
     <div className="relative">
       <div
-        className={`${!editingTransaction && "hidden"} right-[24px] top-[8px]  cursor-pointer border-[2px] rounded-sm bg-white text-black text-[26px] border-solid w-fit`}
+        className={`${!editingTransaction && "hidden"} absolute right-[8px] top-[8px]  cursor-pointer border-[2px] rounded-sm bg-white text-black text-[26px] border-solid w-fit`}
         onClick={handleCloseModal}
       >
         <RxCross2 />
       </div>
-      <div className="bg-conetentBg p-[16px] rounded-lg all__side__shadow">
-        <h2 className="text-lg font-semibold mb-4">Add Transaction</h2>
+      <div className="bg-LconetentBg dark:bg-conetentBg p-[16px] rounded-lg all__side__shadow dark:shadow-dark_all__side__shadow">
+        <h2 className="text-lg font-semibold mb-4">
+          {(editingTransaction && "Update Transaction") ||
+            (!editingTransaction && "Add Transaction")}
+        </h2>
         <form
           onSubmit={formik.handleSubmit}
           className="grid md:grid-cols-2 items-center gap-[16px]"
@@ -120,7 +129,7 @@ const TransactionForm: React.FC<{
             placeholder="Select category"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            options={optionsCategory}
+            options={categoryOptions}
             error={formik.touched.category ? formik.errors.category : undefined}
           />
           <Input
@@ -143,7 +152,7 @@ const TransactionForm: React.FC<{
             error={formik.touched.description ? formik.errors.description : undefined}
           />
           <div className="items-end">
-            <button type="submit" className="bg-dblue rounded-sm px-2 py-2">
+          <button type="submit" className="bg-dblue text-white rounded-sm px-5 py-2 shadow-lg hover:bg-hdblue">
               {(editingTransaction && "Update Transaction") ||
                 (!editingTransaction && "Add New Transaction")}
             </button>

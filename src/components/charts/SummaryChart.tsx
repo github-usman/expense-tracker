@@ -21,7 +21,7 @@ const SummaryChart: React.FC<ITotalSummary> = ({
     [totalIncome, totalExpense, balance]
   );
   return (
-    <div className="bg-conetentBg rounded-lg max-h-[258px] flex-1 w-full lg:w-1/2 p-[16px] all__side__shadow">
+    <div className="bg-LconetentBg dark:bg-conetentBg rounded-lg max-h-[258px] flex-1 w-full lg:w-1/2 p-[16px] all__side__shadow dark:shadow-dark_all__side__shadow">
       <Bar
         data={chartData}
         options={{

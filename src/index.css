@@ -10,18 +10,10 @@
 }
 
 body {
-  background-color: #1a1a1a;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  width: 100%;
-  height: 100vh;
-  margin: 0;
-  color: #eeeef0;
+  @apply bg-Lbg text-Ltext dark:bg-bg dark:text-white;
 }
 
-/* side bar */
-
+/* Custom scrollbar */
 body::-webkit-scrollbar {
   width: 5px;
 }
@@ -39,7 +31,6 @@ body::-webkit-scrollbar-thumb:hover {
   background: #8dd930;
 }
 
-/* items */
 /* Custom scrollbar for the .overflow-items class */
 .overflow-items::-webkit-scrollbar {
   width: 5px;
@@ -58,38 +49,42 @@ body::-webkit-scrollbar-thumb:hover {
   background: #8dd930;
 }
 
-/* For Firefox */
 .overflow-items {
   scrollbar-width: thin;
   scrollbar-color: #b7f36d #1c467000;
 }
 
-
-/* shadow */
-
-.all__side__shadow {
-  box-shadow: 0px 1px 6px 1.5px #000000b8;
+/* overflow */
+@media screen and (max-width: 990px) {
+  .overFlowArea {
+    overflow-x: auto;
+  }
 }
 
+/* Shadow effects */
+.all__side__shadow {
+  box-shadow: 1px 1px 8px 1px #00000010;
+}
 .all__side__shadow_btn {
   position: relative;
   box-shadow: 0px 1px 6px 1.5px #d4d3d3b8;
 }
 
-/* hide number input arrow */
+/* Hide number input arrow */
 @layer base {
   input[type="number"]::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
-}
-@layer base {
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+  input[type="number"] {
+    -ms-appearance: textfield;
+  }
   input[type="date"]::-webkit-calendar-picker-indicator {
-    filter: invert(50%) sepia(100%) saturate(500%) hue-rotate(180deg)
-      brightness(90%) contrast(90%);
-    width: 20px;
-    height: 20px;
+    filter: invert(50%) sepia(100%) saturate(500%) hue-rotate(180deg) brightness(90%)
+      contrast(90%);
   }
 }
-

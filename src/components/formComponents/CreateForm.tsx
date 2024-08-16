@@ -75,7 +75,7 @@ const CreateForm: React.FC = () => {
         <div className="flex-1 w-full lg:w-1/2">
           <form
             onSubmit={formik.handleSubmit}
-            className="bg-conetentBg p-[16px] flex flex-col justify-between rounded-lg all__side__shadow h-[258px]"
+            className="bg-LconetentBg dark:bg-conetentBg p-[16px] flex flex-col justify-between rounded-lg all__side__shadow dark:shadow-dark_all__side__shadow  h-[258px]"
           >
             <div>
               <Input
@@ -100,7 +100,7 @@ const CreateForm: React.FC = () => {
               />
             </div>
             <div className="self-center md:self-start">
-              <button type="submit" className="bg-dblue rounded-sm px-5 py-2">
+              <button type="submit" className="bg-dblue text-white rounded-sm px-5 py-2 shadow-lg hover:bg-hdblue">
                 Submit Total
               </button>
             </div>

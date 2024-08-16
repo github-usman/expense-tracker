@@ -24,7 +24,8 @@ export interface DataContextType {
   setTransactions: React.Dispatch<React.SetStateAction<Transaction[]>>;
   summary: Summary;
   setSummary: React.Dispatch<React.SetStateAction<Summary>>;
-  storageKey: string;
+  isDarkMode: boolean;
+  setIsDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface OptionType {

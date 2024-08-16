@@ -1,37 +1,45 @@
 import React from "react";
 import Select, { StylesConfig } from "react-select";
 import { InputProps, OptionType } from "../../interface/Interfaces";
+import { useDataContext } from "../../containers/DataProvider";
 
-const customStyles = (error?: string): StylesConfig<OptionType, false> => ({
+const customStyles = (
+  error?: string,
+  isDarkMode?: boolean
+): StylesConfig<OptionType, false> => ({
   control: (provided) => ({
     ...provided,
-    borderColor: error ? "#ef1b1b" : "#434040f3",
+    borderColor: error ? "#ef1b1b" : isDarkMode ? "#434040f3" : "",
     borderRadius: "0.375rem",
-    boxShadow: "0 1px 2px rgba(0, 0, 0, 0.05)",
-    backgroundColor: "#1a1a1a",
+    boxShadow: isDarkMode ? "0 1px 2px rgba(0, 0, 0, 0.05)" : "",
+    backgroundColor: isDarkMode ? "#1a1a1a" : "#F5F9FC",
     marginTop: "5px",
   }),
   menu: (provided) => ({
     ...provided,
     borderRadius: "0.375rem",
     marginTop: "0.25rem",
-    backgroundColor: "#3a3a3a",
+    backgroundColor: isDarkMode ? "#3a3a3a" : "#F5F9FC",
   }),
   option: (provided, state) => ({
     ...provided,
-    backgroundColor: state.isSelected
-      ? "rgb(59, 130, 246)"
+    backgroundColor: isDarkMode
+      ? state.isSelected
+        ? "rgb(59, 130, 246)"
+        : state.isFocused
+          ? "#4a4a4a"
+          : "#3a3a3a"
       : state.isFocused
-        ? "#4a4a4a"
-        : "#3a3a3a",
-    color: state.isSelected ? "white" : "white",
+        ? "#c3d7f2"
+        : "#FCF3F3",
+    color: isDarkMode ? (state.isSelected ? "white" : "white") : "#282828",
     padding: "0.5rem 1rem",
     cursor: "pointer",
     borderRadius: "0.375rem",
   }),
   singleValue: (provided) => ({
     ...provided,
-    color: "white",
+    color: isDarkMode ? "white" : "#000",
   }),
 });
 
@@ -52,6 +60,7 @@ const Input: React.FC<InputProps> = ({
     } as React.ChangeEvent<HTMLInputElement>);
   };
 
+  const { isDarkMode } = useDataContext();
   // Handle input change
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -68,7 +77,7 @@ const Input: React.FC<InputProps> = ({
           value={options.find((option) => option.value === value) || null}
           onChange={handleSelectChange}
           onBlur={onBlur}
-          styles={customStyles(error)}
+          styles={customStyles(error, isDarkMode)}
           placeholder={placeholder}
         />
       ) : type !== "textarea" ? (
@@ -79,7 +88,7 @@ const Input: React.FC<InputProps> = ({
           placeholder={placeholder}
           onChange={handleChange}
           onBlur={onBlur}
-          className={`mt-[5px] py-2 px-3 block w-full text-white rounded-md bg-bg border-[0.5px] border-solid  shadow-sm hover:border-dblue sm:text-sm focus:outline-none  ${error ? "border-red-500" : "border-[#434040f3]"}`}
+          className={`mt-[5px] py-2 px-3 block w-full bg-Lbg text-bg dark:text-white rounded-md dark:bg-bg border-[0.5px] border-solid  shadow-sm hover:border-dblue sm:text-sm focus:outline-none  ${error ? "border-red-500" : "dark:border-[#434040f3]"}`}
         />
       ) : (
         <textarea
@@ -87,7 +96,7 @@ const Input: React.FC<InputProps> = ({
           value={value}
           placeholder={placeholder}
           onChange={handleChange}
-          className={`mt-[5px] py-2 px-3 block w-full text-white rounded-md bg-bg border-[0.5px] border-solid  shadow-sm hover:border-dblue sm:text-sm focus:outline-none  ${error ? "border-red-500" : "border-[#434040f3]"}`}
+          className={`mt-[5px] py-2 px-3 block w-full text-black dark:text-white rounded-md bg-Lbg dark:bg-bg border-[0.5px] border-solid  shadow-sm hover:border-dblue sm:text-sm focus:outline-none  ${error ? "border-red-500" : "dark:border-[#434040f3]"}`}
         />
       )}
       {error && <p className="text-red-500 text-xs mt-[1px]">{error}</p>}

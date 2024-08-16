@@ -38,10 +38,10 @@ const TransactionsTable = () => {
         </div>
       )}
 
-      <div className="overflow-auto overflow-items">
-        <div className="bg-conetentBg p-[16px] min-w-[990px] rounded-lg all__side__shadow  overflow-visible">
-          <h2 className="text-lg font-semibold mb-4">List of Transactions</h2>
-          <div className="grid grid-cols-[2fr_2fr_2fr_2fr_3fr_0.5fr] text-[18px] font-semibold border-b-[1px] border-solid border-[#434040f3]">
+      <div className="overFlowArea overflow-items">
+        <div className="bg-LconetentBg dark:bg-conetentBg p-[16px] min-w-[990px] rounded-lg all__side__shadow dark:shadow-dark_all__side__shadow  overflow-visible">
+          <h2 className="text-lg font-semibold ">List of Transactions</h2>
+          <div className="grid grid-cols-[2fr_2fr_2fr_2fr_3fr_0.5fr] text-[18px] py-[8px] font-semibold border-b-[1px] border-solid bg-[#F5F9FC] dark:bg-inherit dark:border-[#434040f3]">
             <h3>Type</h3>
             <h3>Amount($)</h3>
             <h3>Category</h3>
@@ -54,7 +54,7 @@ const TransactionsTable = () => {
           </div>
           {transactions.map((item) => (
             <div
-              className="grid grid-cols-[2fr_2fr_2fr_2fr_3fr_0.5fr] mt-[25px] border-b-[1px] border-solid border-[#434040f3]"
+              className="grid grid-cols-[2fr_2fr_2fr_2fr_3fr_0.5fr] mt-[25px] border-b-[1px] border-solid dark:border-[#434040f3]"
               key={item.id}
             >
               <p
